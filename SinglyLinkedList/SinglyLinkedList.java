@@ -219,8 +219,9 @@ public class SinglyLinkedList {
 		}
 	}
 
-	public void sortList() {
-		//Currently sorting based on Integer data only
+	public void sortListUsingBubbleSort() {
+		// Currently sorting based on Integer data only
+		// Using Bubble Sort
 		if (isEmpty()) {
 			System.out.println("Empty list.Operation not possible!!!");
 			return;
@@ -241,6 +242,155 @@ public class SinglyLinkedList {
 		}
 	}
 
+	// public ListNode sortListUsingMergeSort() {
+	// if (isEmpty() || head.getNext() == null)
+	// return head;
+	// ListNode middle=
+	// }
+
+	public ListNode middleNode() {
+		if (isEmpty())
+			return head;
+		ListNode first = head, second = head.getNext();
+		while (second != null && second.getNext() != null) {
+			first = first.getNext();
+			second = second.getNext().getNext();
+		}
+		return first;
+	}
+
+	public void rotation(int diff) {
+		// Same method can be used for both clockwise and anti-clockwise rotation with
+		// different value of arguments
+		ListNode current = head;
+		int i = 1;
+		while (i < diff) {
+			current = current.getNext();
+			i++;
+		}
+		ListNode temp = current.getNext();
+		ListNode newHead = temp;
+		current.setNext(null);
+		while (temp.getNext() != null) {
+			temp = temp.getNext();
+		}
+		temp.setNext(head);
+		head = newHead;
+	}
+
+	public void rotateClockwise(int pos) {
+		if (isEmpty() || pos < 0) {
+			System.out.println("Empty list.Operation not allowed!!!");
+			return;
+		}
+		int size = length();
+		pos = pos % size;
+		if (pos == 0)
+			return;
+		System.out.println("Rotating Clockwise....");
+		rotation(size - pos);
+	}
+
+	public void rotateAntiClockwise(int pos) {
+		if (isEmpty() || pos < 0) {
+			System.out.println("Empty list.Operation not allowed!!!");
+			return;
+		}
+		int size = length();
+		pos = pos % size;
+		if (pos == 0)
+			return;
+		System.out.println("Rotating Anti-clockwise...");
+		rotation(pos);
+	}
+
+	public boolean ifLoopPresent() {
+		if (isEmpty()) {
+			System.out.println("Empty list.Operation not allowed!!!");
+			return false;
+		}
+		ListNode slow, fast;
+		slow = fast = head;
+		while (fast.getNext() != null && fast.getNext().getNext() != null) {
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+			if (slow.getiData() == fast.getiData())
+				return true;
+		}
+		return false;
+	}
+
+	public int detectAndProvidelengthOfLoop() {
+		if (isEmpty()) {
+			System.out.println("Empty list.Operation not allowed!!!");
+			return -1;
+		}
+		ListNode slow, fast;
+		slow = fast = head;
+		int loopSize = 0;
+		while (fast.getNext() != null && fast.getNext().getNext() != null) {
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+			if (slow.getiData() == fast.getiData())
+				break;
+		}
+		if (slow == fast) {
+			System.out.println("Loop present...");
+			while (slow.getNext() != fast) {
+				slow = slow.getNext();
+				loopSize++;
+			}
+			loopSize++;
+		}
+		return loopSize;
+	}
+
+	public void detectAndRemoveLoop() {
+		if (isEmpty()) {
+			System.out.println("Empty list.Operation not allowed!!!");
+			return;
+		}
+		ListNode slow, fast;
+		slow = fast = head;
+		while (fast.getNext() != null && fast.getNext().getNext() != null) {
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+			if (slow.getiData() == fast.getiData())
+				break;
+		}
+		if (slow == fast) {
+			System.out.println("Loop is detected.....");
+			if (slow == head) {
+				while (slow.getNext() != fast) {
+					slow = slow.getNext();
+				}
+				slow.setNext(null);
+			} else {
+				slow = head;
+				while (slow.getNext() != fast.getNext()) {
+					slow = slow.getNext();
+				}
+				fast.setNext(null);
+			}
+		}
+	}
+
+	public ListNode detectAndRemoveMiddleNode() {
+		if (isEmpty() || head.getNext() == null) {
+			System.out.println("Empty list.Operation not allowed");
+			return head;
+		}
+		ListNode slow = head, fast = head.getNext(), prev = null;
+		while (fast != null && fast.getNext() != null) {
+			prev = slow;
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+		}
+		prev.setNext(slow.getNext());
+		slow.setNext(null);
+		return slow;
+	}
+
 	public static void main(String[] args) {
 		SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
 		singlyLinkedList.insertFirst(22, 2.99);
@@ -248,23 +398,34 @@ public class SinglyLinkedList {
 		singlyLinkedList.insertFirst(66, 6.99);
 		singlyLinkedList.insertFirst(88, 8.99);
 		singlyLinkedList.displayList();
-		// System.out.println("Deleted first node: " + singlyLinkedList.deleteFirst());
+		// For Adding a loop in list
+		singlyLinkedList.head.getNext().getNext().getNext().setNext(singlyLinkedList.head.getNext());
+		System.out.println("Is loop present in list:" + singlyLinkedList.ifLoopPresent());
+		System.out.println("Length of loop: " + singlyLinkedList.detectAndProvidelengthOfLoop());
+		System.out.println("Detect and remove loop...");
+		singlyLinkedList.detectAndRemoveLoop();
+		singlyLinkedList.displayList();
+		System.out.println("Deleted first node: " + singlyLinkedList.deleteFirst());
 		System.out.println("Finding element: " + singlyLinkedList.find(88));
-		// System.out.println("Deleting element: " + singlyLinkedList.delete(22));
+		System.out.println("Deleting element: " + singlyLinkedList.delete(22));
 		System.out.println("Length: " + singlyLinkedList.length());
 		singlyLinkedList.insert(99, 9.99);
 		singlyLinkedList.displayList();
 		singlyLinkedList.insertAtPosition(100, 10.99, 6);
 		singlyLinkedList.insertAfterGivenNode(100, 11, 1.11);
 		singlyLinkedList.displayList();
-		// System.out.println("Deleted last node: " + singlyLinkedList.deleteLast());
-		// System.out.println("Delete at given position: " +
-		// singlyLinkedList.deleteAtGivenPosition(8));
+		System.out.println("Deleted last node: " + singlyLinkedList.deleteLast());
+		System.out.println("Delete at given position: " + singlyLinkedList.deleteAtGivenPosition(8));
 		System.out.println("Nth node from end: " + singlyLinkedList.nthNodeFromEnd(6));
 		System.out.println("Before Sorting......");
 		singlyLinkedList.displayList();
-		singlyLinkedList.sortList();
+		singlyLinkedList.sortListUsingBubbleSort();
 		System.out.println("After Sorting.....");
+		singlyLinkedList.displayList();
+		System.out.println("Middle Node: " + singlyLinkedList.middleNode());
+		singlyLinkedList.rotateClockwise(8);
+		singlyLinkedList.rotateAntiClockwise(4);
+		System.out.println("Deleted middle node: " + singlyLinkedList.detectAndRemoveMiddleNode());
 		singlyLinkedList.displayList();
 	}
 }
