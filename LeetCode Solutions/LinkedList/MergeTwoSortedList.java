@@ -1,10 +1,17 @@
 package com.LinkedList;
 
-// List1  3 -> 6 -> 7 -> 9->11->14
-//List2  1 -> 2 -> 5 -> 8
+/**
+ * @author Vinayak Nair$
+ *
+ */
+
+/*
+ * List1 3 -> 6 -> 7 -> 9->11->14 
+ * List2 1 -> 2 -> 5 -> 8
+ */
 public class MergeTwoSortedList {
 
-	public ListNode mergeTwoList(ListNode l1, ListNode l2) {
+	private ListNode mergeTwoList(ListNode l1, ListNode l2) {
 		if (l1 == null)
 			return l2;
 		if (l2 == null)
@@ -43,16 +50,6 @@ public class MergeTwoSortedList {
 		return head;
 	}
 
-	public void displayList(ListNode head) {
-		if (head == null)
-			return;
-		while (head != null) {
-			System.out.print(head.val + " ");
-			head = head.next;
-		}
-		System.out.println();
-	}
-
 	public static void main(String[] args) {
 		MergeTwoSortedList list = new MergeTwoSortedList();
 		ListNode firsta = new ListNode(3);
@@ -73,7 +70,7 @@ public class MergeTwoSortedList {
 		seconda.next = secondb;
 		secondb.next = secondc;
 		secondc.next = secondd;
-		list.displayList(list.mergeTwoList(firsta, seconda));
+		firsta.displayList(list.mergeTwoList(firsta, seconda));
 
 	}
 

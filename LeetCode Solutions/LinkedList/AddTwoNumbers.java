@@ -1,8 +1,13 @@
 package com.LinkedList;
 
+/**
+ * @author Vinayak Nair$
+ *
+ */
+
 public class AddTwoNumbers {
 
-	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode current = null, head = null;
 		int sum = 0, carry = 0;
 		while (l1 != null || l2 != null) {
@@ -32,16 +37,6 @@ public class AddTwoNumbers {
 		return head != null ? head : new ListNode(0);
 	}
 
-	public void displayList(ListNode head) {
-		if (head == null)
-			return;
-		while (head != null) {
-			System.out.print(head.val + " ");
-			head = head.next;
-		}
-		System.out.println();
-	}
-
 	public static void main(String[] args) {
 		AddTwoNumbers singlyLinkedList = new AddTwoNumbers();
 		ListNode l11 = new ListNode(7);
@@ -56,7 +51,7 @@ public class AddTwoNumbers {
 		l21.next = l22;
 		l22.next = l23;
 		l23.next = l24;
-		singlyLinkedList.displayList(singlyLinkedList.addTwoNumbers(l11, l21));
+		l11.displayList(singlyLinkedList.addTwoNumbers(l11, l21));
 	}
 
 }

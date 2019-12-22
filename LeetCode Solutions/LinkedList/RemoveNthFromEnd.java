@@ -1,9 +1,14 @@
 package com.LinkedList;
 
+/**
+ * @author Vinayak Nair$
+ *
+ */
+
 public class RemoveNthFromEnd {
 
 	
-	public ListNode removeNthFromEnd(ListNode head,int n) {
+	private ListNode removeNthFromEnd(ListNode head,int n) {
 		if(head==null)
 			return head;
 		int size=length(head);
@@ -24,16 +29,6 @@ public class RemoveNthFromEnd {
 		prev.next=current.next;
 		current.next=null;
 		return head;
-	}
-	
-	public void displayList(ListNode head) {
-		if(head==null)
-			return;
-		while(head!=null) {
-			System.out.print(head.val+" ");
-			head=head.next;
-		}
-		System.out.println();
 	}
 	
 	private int length(ListNode head) {
@@ -58,8 +53,7 @@ public class RemoveNthFromEnd {
 		second.next=third;
 		third.next=fourth;
 		fourth.next=fifth;
-		System.out.println(head);
-		singlyLinkedList.displayList(singlyLinkedList.removeNthFromEnd(head, 5));
+		head.displayList(singlyLinkedList.removeNthFromEnd(head, 5));
 	}
 
 }
