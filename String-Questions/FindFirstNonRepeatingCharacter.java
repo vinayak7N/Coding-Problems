@@ -6,7 +6,7 @@ package com.string.problems;
  */
 public class FindFirstNonRepeatingCharacter {
 
-	static char removeDuplicatesSecondMethod(String inputString) {
+	static char findFirstNonRepeatingCharacter(String inputString) {
 
 		StringBuffer newString = new StringBuffer();
 		inputString = inputString.toUpperCase();
@@ -14,17 +14,17 @@ public class FindFirstNonRepeatingCharacter {
 			char ch = inputString.charAt(i);
 			if (newString.indexOf(ch + "") < 0) {
 				newString.append(ch + "");
-			}else {
-				newString.deleteCharAt(newString.indexOf(ch+""));
+			} else {
+				newString.deleteCharAt(newString.indexOf(ch + ""));
 			}
 		}
 		return newString.charAt(0);
 	}
-	
+
 	public static void main(String[] args) {
-		System.out.println("Original String: "+"JAVAJ");
-		System.out.println("First non-repeating character: "+removeDuplicatesSecondMethod("JAVAJ"));
-		
+		System.out.println("Original String: " + "JAVAJ");
+		System.out.println("First non-repeating character: " + findFirstNonRepeatingCharacter("JAVAJ"));
+
 	}
 
 }
