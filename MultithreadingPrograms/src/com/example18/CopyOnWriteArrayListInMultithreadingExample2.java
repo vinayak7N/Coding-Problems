@@ -25,8 +25,10 @@ public class CopyOnWriteArrayListInMultithreadingExample2 extends Thread {
         Iterator<Character> iterator = copyOnWriteArrayList.iterator();
 
         System.out.println(Thread.currentThread().getName() + " iterating list...");
+        System.out.println("Element: Z will be added inside iteration...");
         while (iterator.hasNext()) {
             System.out.println("Element: " + iterator.next());
+            copyOnWriteArrayList.addIfAbsent('Z');
             Thread.sleep(2000);
 
             /*Remove operation is not allowed in CopyOnArrayList as it will throw
