@@ -5,7 +5,6 @@ class ListNode<T>{
 		
 		public ListNode(T data) {
 			this.data=data;
-			this.next=null;
 		}
 		
 		public void setData(T data) {
